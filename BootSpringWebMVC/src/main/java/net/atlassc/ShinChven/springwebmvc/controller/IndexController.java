@@ -12,8 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
 
 
-    @RequestMapping(name = "hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public ModelAndView hello() {
+        System.out.println("hello===============");
+        System.out.println("hello===============");
+        System.out.println("hello===============");
+        System.out.println("hello===============");
+        System.out.println("hello===============");
         return new ModelAndView("hello");
     }
 }
