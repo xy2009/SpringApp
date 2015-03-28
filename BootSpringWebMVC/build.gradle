@@ -1,0 +1,67 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("io.spring.gradle:dependency-management-plugin:0.4.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea' 
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+    flatDir { dirs "lib" }
+}
+
+configurations {
+    moreLibs
+}
+
+war {
+    baseName = 'SpringWebMVC'
+    version = '0.0.1-SNAPSHOT'
+    from '/src/main/webapp' // adds a file-set to the root of the archive
+    webInf { from '/src/main/webapp/WEB-INF/' } // adds a file-set to the WEB-INF dir.
+    classpath fileTree('lib') // adds a file-set to the WEB-INF/lib dir.
+    classpath configurations.moreLibs // adds a configuration to the WEB-INF/lib dir.
+    webXml = file('/src/main/webapp/WEB-INF/web.xml') // copies a file to WEB-INF/web.xml
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    runtime("mysql:mysql-connector-java")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    testCompile("org.springframework.boot:spring-boot-starter-test") 
+}
+
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
