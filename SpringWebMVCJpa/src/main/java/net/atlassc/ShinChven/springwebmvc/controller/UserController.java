@@ -26,9 +26,8 @@ public class UserController {
 
     @RequestMapping(value = "register_user", method = RequestMethod.POST)
     public String registerUser(String username, String password, int age) {
-        System.out.println("收到："+username);
         UserEntity user = new UserEntity();
-        user.setUserName("中文");
+        user.setUserName(username);
         user.setAge(age);
         user.setPassword(password);
         userRepo.save(user);

@@ -69,6 +69,7 @@ public class DataBaseConfig {
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("connection.characterEncoding","UTF-8");
         managerFactoryBean.setJpaProperties(properties);
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
