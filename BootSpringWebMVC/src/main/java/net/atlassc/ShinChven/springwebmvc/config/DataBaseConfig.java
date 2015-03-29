@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
@@ -27,6 +28,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"net.atlassc.ShinChven.springwebmvc.repository"})
+@PropertySource(value = {"classpath:application.properties"})
 public class DataBaseConfig {
 
     @Autowired
@@ -40,10 +42,10 @@ public class DataBaseConfig {
 
         BasicDataSource dataSource = new BasicDataSource();
 
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/SpringBoot?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true&amp;failOverReadOnly=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234");
+        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
 
         return dataSource;
     }
@@ -53,7 +55,7 @@ public class DataBaseConfig {
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         sessionFactoryBean.setHibernateProperties(properties);
         return sessionFactoryBean;
     }
@@ -64,7 +66,7 @@ public class DataBaseConfig {
         managerFactoryBean.setDataSource(dataSource());
         Properties properties = new Properties();
         // using jpa, perperties for jpa must be set
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         properties.setProperty("hibernate.hbm2ddl.auto", "create");
         properties.setProperty("hibernate.format_sql", "true");
         managerFactoryBean.setJpaProperties(properties);
@@ -86,7 +88,7 @@ public class DataBaseConfig {
     }
 
     @Bean
-    public HibernateExceptionTranslator hibernateExceptionTranslator(){
+    public HibernateExceptionTranslator hibernateExceptionTranslator() {
         return new HibernateExceptionTranslator();
     }
 
