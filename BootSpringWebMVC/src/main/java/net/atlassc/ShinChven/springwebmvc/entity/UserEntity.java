@@ -2,6 +2,7 @@ package net.atlassc.ShinChven.springwebmvc.entity;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -14,8 +15,10 @@ public class UserEntity implements Serializable{
     private long uid;
     private String userName;
     private int age;
+    private String password;
 
     @Id
+    @GeneratedValue
     public long getUid() {
         return uid;
     }
@@ -40,5 +43,13 @@ public class UserEntity implements Serializable{
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

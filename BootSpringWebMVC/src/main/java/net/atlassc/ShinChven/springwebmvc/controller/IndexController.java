@@ -26,19 +26,5 @@ public class IndexController {
         return new ModelAndView("hello");
     }
 
-    /**
-     * test json responseBody
-     * @return
-     */
-    @RequestMapping(value = "/users",method = RequestMethod.GET)
-    public @ResponseBody List<UserEntity> getUsers(){
-        List<UserEntity> users = new ArrayList<UserEntity>();
-        for (int i = 0; i < 15; i++) {
-            UserEntity user=new UserEntity();
-            user.setUserName("User_"+i);
-            user.setAge(i);
-            users.add(user);
-        }
-        return users;
-    }
+
 }
