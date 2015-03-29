@@ -24,13 +24,14 @@ public class UserController {
 
 
     @RequestMapping(value = "register_user", method = RequestMethod.POST)
-    public void registerUser(String username, String password, int age) {
+    public String registerUser(String username, String password, int age) {
         UserEntity user = new UserEntity();
         user.setUserName(username);
         user.setAge(age);
         user.setPassword(password);
         userRepo.save(user);
         System.out.println(user.getUid());
+        return "redirect:/users.do";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)

@@ -67,7 +67,7 @@ public class DataBaseConfig {
         Properties properties = new Properties();
         // using jpa, perperties for jpa must be set
         properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.setProperty("hibernate.format_sql", "true");
         managerFactoryBean.setJpaProperties(properties);
 

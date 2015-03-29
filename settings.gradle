@@ -1,2 +1,2 @@
-rootProject.name = 'BootApps'
-include ':BootSpringWebMVC'
+rootProject.name = 'SpringApps'
+include ':SpringWebMVCJpa'
