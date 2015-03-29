@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -25,12 +26,13 @@ public class UserController {
 
     @RequestMapping(value = "register_user", method = RequestMethod.POST)
     public String registerUser(String username, String password, int age) {
+        System.out.println("收到："+username);
         UserEntity user = new UserEntity();
-        user.setUserName(username);
+        user.setUserName("中文");
         user.setAge(age);
         user.setPassword(password);
         userRepo.save(user);
-        System.out.println(user.getUid());
+        System.out.println(user.getUserName());
         return "redirect:/users.do";
     }
 
