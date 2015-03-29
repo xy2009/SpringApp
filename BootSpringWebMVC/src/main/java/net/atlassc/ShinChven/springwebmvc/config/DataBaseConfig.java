@@ -54,8 +54,6 @@ public class DataBaseConfig {
         sessionFactoryBean.setDataSource(dataSource());
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.format_sql", "true");
         sessionFactoryBean.setHibernateProperties(properties);
         return sessionFactoryBean;
     }
@@ -64,6 +62,12 @@ public class DataBaseConfig {
     LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean managerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         managerFactoryBean.setDataSource(dataSource());
+        Properties properties = new Properties();
+        // using jpa, perperties for jpa must be set
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.format_sql", "true");
+        managerFactoryBean.setJpaProperties(properties);
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(Boolean.TRUE);
