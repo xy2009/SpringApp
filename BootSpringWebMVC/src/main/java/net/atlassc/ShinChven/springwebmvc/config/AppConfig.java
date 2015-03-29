@@ -24,7 +24,7 @@ import java.util.List;
  * Created by ShinChven on 15/3/29.
  */
 @Configuration
-@ComponentScan("net.atlassc.ShinChven.springwebmvc")
+@ComponentScan("net.atlassc.ShinChven.springwebmvc.*")
 @Import({DataBaseConfig.class})
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {

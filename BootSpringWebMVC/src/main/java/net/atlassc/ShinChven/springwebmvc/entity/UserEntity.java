@@ -1,12 +1,30 @@
 package net.atlassc.ShinChven.springwebmvc.entity;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
+
 /**
  * Created by ShinChven on 15/3/29.
  */
-public class UserEntity {
+@Entity(name = "User")
+public class UserEntity implements Serializable{
+
+    private long uid;
     private String userName;
     private int age;
 
+    @Id
+    public long getUid() {
+        return uid;
+    }
+
+    public void setUid(long uid) {
+        this.uid = uid;
+    }
+
+    @Basic
     public String getUserName() {
         return userName;
     }
@@ -15,6 +33,7 @@ public class UserEntity {
         this.userName = userName;
     }
 
+    @Basic
     public int getAge() {
         return age;
     }
