@@ -7,5 +7,5 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-request.getRequestDispatcher("/register.do").forward(request,response);
+request.getRequestDispatcher("/index.html").forward(request,response);
 %>
